@@ -21,21 +21,25 @@ namespace Task5Graphic
         double coeff = 1;
         bool drawing = false;
         CoordinatePlane coordinatePlane = new CoordinatePlane();
-        private Timer t = new Timer(100);
+        private Timer t = new Timer(10);
+        private CoordinatePlane.DrawFunc drawFunc;
+
         public GraphicTask()
         {
             InitializeComponent();
             bitmap = new Bitmap(pictureBox.Width,pictureBox.Height);
             g = Graphics.FromImage(bitmap);
+
+            MyDraw(g);
         }
         public void MyDraw(Graphics g)
         {
-            coordinatePlane.Draw(g, pictureBox,1,0);
+            coordinatePlane.Draw(g, pictureBox);
             pictureBox.Image = bitmap;
         }
         private void GraphicTask_Paint(object sender, PaintEventArgs e)
         {
-            MyDraw(g);
+            //MyDraw(g);
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -157,37 +161,50 @@ namespace Task5Graphic
             //t.Enabled = false;
             t.Start();
             t.Elapsed += timer_Tick;
-            PointF point1 = new PointF(coordinatePlane.II(0), coordinatePlane.JJ(coordinatePlane.FuncModel(1, 0)));
-            PointF point2 = new PointF(coordinatePlane.II(0), coordinatePlane.JJ(coordinatePlane.FuncModel(1, 1)));
-            coordinatePlane.Points.Add(point1);
-            coordinatePlane.Points.Add(point2);
+            counter = 0;
+            //coordinatePlane.DrawCurve(g, );
+            //coordinatePlane.Points.Add(point1);
+            //coordinatePlane.Points.Add(point2);
         }
-        //int i = 0;
+        double counter = 0;
         private void timer_Tick(object sender, EventArgs e)
         {
-            Invoke(new Action(() =>
-            {
-                //if (i < 500)
-                //{
-                //    i++;
-                //}
-                //PointF point = new PointF(coordinatePlane.II(i),coordinatePlane.JJ(coordinatePlane.FuncModel(1,i)));
-                //coordinatePlane.points[i] = point;
-                //coordinatePlane.Points.Add(point);
-                coordinatePlane.Step += 1;
-                coordinatePlane.Draw(g, pictureBox,1,0);
-                pictureBox.Image = bitmap;
-            }));
+                Invoke(new Action(() =>
+                {
+                    coordinatePlane.Step += 1;
+                    coordinatePlane.Draw(g, pictureBox);
+                    coordinatePlane.DrawCurve(g, drawFunc, counter);
+                    pictureBox.Image = bitmap;
+
+                    if (counter < 50)
+                    {
+                        counter+= 0.5;
+                    }
+                    else
+                    {
+                        t.Elapsed -= timer_Tick;
+                        t.Stop();
+                    }
+                }));
         }
-        RadioButton GetSelectedRadioButton(GroupBox groupBox)
+        
+        private void RadioGroupCheckChanged(object sender, EventArgs e)
         {
-            foreach (Control control in groupBox.Controls)
+            t.Stop();
+            if (sender is RadioButton radio && radio.Checked)
             {
-                RadioButton radioButton = control as RadioButton;
-                if (radioButton != null && radioButton.Checked)
-                    return radioButton;
+                switch (radio.Tag)
+                {
+                    case "1": drawFunc = (x) => Math.Pow(x, 2);
+                        break;
+                    case "2":
+                            drawFunc = (x) => Math.Pow(x, 3);
+                        break;
+                    case "3":
+                            drawFunc = (x) => Math.Pow(x, 0.5);
+                        break;
+                }
             }
-            return null;
         }
     }
 }
