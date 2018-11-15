@@ -21,6 +21,7 @@ namespace Task5Graphic
         double coeff = 1;
         bool drawing = false;
         CoordinatePlane coordinatePlane = new CoordinatePlane();
+        private Timer t = new Timer(100);
         public GraphicTask()
         {
             InitializeComponent();
@@ -29,7 +30,7 @@ namespace Task5Graphic
         }
         public void MyDraw(Graphics g)
         {
-            coordinatePlane.Draw(g, pictureBox, coordinatePlane.Step);
+            coordinatePlane.Draw(g, pictureBox,1,0);
             pictureBox.Image = bitmap;
         }
         private void GraphicTask_Paint(object sender, PaintEventArgs e)
@@ -151,24 +152,31 @@ namespace Task5Graphic
             coordinatePlane.y2 = x + (coordinatePlane.y2 - y) * coeff;
             MyDraw(g);
         }
-
-        private Timer t = new Timer(100);
         private void Start_btn_Click(object sender, EventArgs e)
         {
+            //t.Enabled = false;
             t.Start();
             t.Elapsed += timer_Tick;
+            PointF point1 = new PointF(coordinatePlane.II(0), coordinatePlane.JJ(coordinatePlane.FuncModel(1, 0)));
+            PointF point2 = new PointF(coordinatePlane.II(0), coordinatePlane.JJ(coordinatePlane.FuncModel(1, 1)));
+            coordinatePlane.Points.Add(point1);
+            coordinatePlane.Points.Add(point2);
         }
+        //int i = 0;
         private void timer_Tick(object sender, EventArgs e)
         {
             Invoke(new Action(() =>
             {
+                //if (i < 500)
+                //{
+                //    i++;
+                //}
+                //PointF point = new PointF(coordinatePlane.II(i),coordinatePlane.JJ(coordinatePlane.FuncModel(1,i)));
+                //coordinatePlane.points[i] = point;
+                //coordinatePlane.Points.Add(point);
                 coordinatePlane.Step += 1;
-                //coordinatePlane.DrawModel(1,0);
-                //MyDraw(g);
-                // g.DrawCurve(,20+coordinatePlane.Step);
-                coordinatePlane.Draw(g, pictureBox, coordinatePlane.Step);
+                coordinatePlane.Draw(g, pictureBox,1,0);
                 pictureBox.Image = bitmap;
-                //pictureBox.Update();
             }));
         }
         RadioButton GetSelectedRadioButton(GroupBox groupBox)
