@@ -1,0 +1,6 @@
+C:\Users\bakul\OneDrive\Рабочий стол\АТТЕСТАЦИЯ ПО ПРОГАММИРОВАНИЮ\Компьютерная графика\2 аттестация\Task5Graphic\ClassLibrary\bin\Debug\ClassLibrary.dll
+C:\Users\bakul\OneDrive\Рабочий стол\АТТЕСТАЦИЯ ПО ПРОГАММИРОВАНИЮ\Компьютерная графика\2 аттестация\Task5Graphic\ClassLibrary\bin\Debug\ClassLibrary.pdb
+C:\Users\bakul\OneDrive\Рабочий стол\АТТЕСТАЦИЯ ПО ПРОГАММИРОВАНИЮ\Компьютерная графика\2 аттестация\Task5Graphic\ClassLibrary\obj\Debug\ClassLibrary.csproj.CoreCompileInputs.cache
+C:\Users\bakul\OneDrive\Рабочий стол\АТТЕСТАЦИЯ ПО ПРОГАММИРОВАНИЮ\Компьютерная графика\2 аттестация\Task5Graphic\ClassLibrary\obj\Debug\ClassLibrary.dll
+C:\Users\bakul\OneDrive\Рабочий стол\АТТЕСТАЦИЯ ПО ПРОГАММИРОВАНИЮ\Компьютерная графика\2 аттестация\Task5Graphic\ClassLibrary\obj\Debug\ClassLibrary.pdb
+C:\Users\bakul\OneDrive\Рабочий стол\АТТЕСТАЦИЯ ПО ПРОГАММИРОВАНИЮ\Компьютерная графика\2 аттестация\Task5Graphic\ClassLibrary\obj\Debug\ClassLibrary.csprojAssemblyReference.cache
