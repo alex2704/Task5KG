@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Timer = System.Timers.Timer;
+using System.Threading;
 
 namespace Task5Graphic
 {
@@ -150,21 +152,24 @@ namespace Task5Graphic
             MyDraw(g);
         }
 
+        private Timer t = new Timer(100);
         private void Start_btn_Click(object sender, EventArgs e)
         {
-            timer.Enabled = true;
-            timer.Start();
+            t.Start();
+            t.Elapsed += timer_Tick;
         }
         private void timer_Tick(object sender, EventArgs e)
         {
-            coordinatePlane.Step += 1;
-            //coordinatePlane.DrawModel(1,0);
-            //MyDraw(g);
-            // g.DrawCurve(,20+coordinatePlane.Step);
-            coordinatePlane.Draw(g, pictureBox, coordinatePlane.Step);
-            pictureBox.Image = bitmap;
-            pictureBox.Update();
-            Invalidate();
+            Invoke(new Action(() =>
+            {
+                coordinatePlane.Step += 1;
+                //coordinatePlane.DrawModel(1,0);
+                //MyDraw(g);
+                // g.DrawCurve(,20+coordinatePlane.Step);
+                coordinatePlane.Draw(g, pictureBox, coordinatePlane.Step);
+                pictureBox.Image = bitmap;
+                //pictureBox.Update();
+            }));
         }
         RadioButton GetSelectedRadioButton(GroupBox groupBox)
         {
