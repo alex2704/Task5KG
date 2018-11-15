@@ -10,7 +10,9 @@ namespace ClassLibrary
 {
     public class CoordinatePlane
     {
-        public int Step { get; set; } = 0;
+        public List<PointF> Points { get; set; } = new List<PointF>();
+        //public PointF[] points = new PointF[500];
+        public int Step { get; set; } = 1;
         static int I1 = 0, J1 = 0, I2, J2;
         public double x1 = -0.1, y1 = -1, x2 = 3.1, y2 = 16;
         public delegate int IJ(double x);
@@ -103,7 +105,8 @@ namespace ClassLibrary
                 g.DrawString(s, myFont, Brushes.Black, II(0) + 5, JJ(i * h1) - 5);
             }
         }
-        public void Draw(Graphics g, PictureBox pictureBox, int step)
+        PointF[] pointsMas = new PointF[500];
+        public void Draw(Graphics g, PictureBox pictureBox, int v, int x)
         {
             I2 = pictureBox.Width;
             J2 = pictureBox.Height;
@@ -115,12 +118,22 @@ namespace ClassLibrary
                 myFont = new Font("Arial", 7, FontStyle.Bold);
                 OX(II,JJ,g);
                 OY(II,JJ,g);
-                PointF p1 = new PointF(II(0), JJ(0));
-                PointF p2 = new PointF(II(5), JJ(10));
-                PointF p3 = new PointF(II(10 ), JJ(5));
-                PointF p4 = new PointF(II(20 + step), JJ(20 + step));
-                PointF[] points = { p1, p2, p3, p4 };
+                PointF[] points = new PointF[500];
+                for (int i = 0; i < 500; i++)
+                {
+                    points[i] = new PointF(II(i), JJ(FuncModel(v, i)));
+                }
+                //PointF p1 = new PointF(II(0), JJ(0));
+                //PointF p2 = new PointF(II(5), JJ(10));
+                //PointF p3 = new PointF(II(10), JJ(5));
+                //PointF p4 = new PointF(II(20 + Step), JJ(20 + Step));
+                //PointF[] points = { p1, p2, p3, p4 };
                 g.DrawCurve(Pens.Black, points);
+                //if (Points.Count!=0)
+                //{
+                //    PointF[] mas = Points.ToArray();
+                //    g.DrawCurve(MyPen1, mas);
+                //}
                 myFont.Dispose();
             }
             finally
@@ -141,13 +154,20 @@ namespace ClassLibrary
                     return 0;
             }
         }
-        public void DrawModel(int v, double x)
+        public void StartDrawModel(int v, double x)
         {
             PointF p1, p2 = new PointF();
-            double y = FuncModel(v, x + Step);
-            p1 = new PointF(II(x + Step),JJ(y));
-            p2 = new PointF(II(x + Step + 1), JJ(FuncModel(v, x + Step + 1)));
+            double y = FuncModel(v, x);
+            p1 = new PointF(II(x),JJ(y));
+            p2 = new PointF(II(x + 100), JJ(FuncModel(v, x + 100)));
+            //Points.Add(p1);
+            //Points.Add(p2);
         }
-      
+        public void AddNewPoint(int v, double x)
+        {
+            //PointF numberPoint = new PointF(II(Points[Points.Count - 1].X + Step), JJ(FuncModel(v, Points[Points.Count - 1].X + Step)));
+            PointF numberPoint = new PointF(II(x + Step), JJ(FuncModel(v, x + Step)));
+            //Points.Add(numberPoint);
+        }
     }
 }
