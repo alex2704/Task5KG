@@ -157,25 +157,25 @@ namespace Task5Graphic
             //t.Enabled = false;
             t.Start();
             t.Elapsed += timer_Tick;
-            PointF point1 = new PointF(coordinatePlane.II(0), coordinatePlane.JJ(coordinatePlane.FuncModel(1, 0)));
-            PointF point2 = new PointF(coordinatePlane.II(0), coordinatePlane.JJ(coordinatePlane.FuncModel(1, 1)));
-            coordinatePlane.Points.Add(point1);
-            coordinatePlane.Points.Add(point2);
+            //PointF point1 = new PointF(coordinatePlane.II(0), coordinatePlane.JJ(coordinatePlane.FuncModel(1, 0)));
+            //PointF point2 = new PointF(coordinatePlane.II(0), coordinatePlane.JJ(coordinatePlane.FuncModel(1, 1)));
+            //coordinatePlane.Points.Add(point1);
+            //coordinatePlane.Points.Add(point2);
         }
-        //int i = 0;
+        int i = 0;
         private void timer_Tick(object sender, EventArgs e)
         {
             Invoke(new Action(() =>
             {
-                //if (i < 500)
-                //{
-                //    i++;
-                //}
+                if (i < 500)
+                {
+                    i++;
+                }
                 //PointF point = new PointF(coordinatePlane.II(i),coordinatePlane.JJ(coordinatePlane.FuncModel(1,i)));
                 //coordinatePlane.points[i] = point;
                 //coordinatePlane.Points.Add(point);
                 coordinatePlane.Step += 1;
-                coordinatePlane.Draw(g, pictureBox,1,0);
+                coordinatePlane.Draw(g, pictureBox,1,i);
                 pictureBox.Image = bitmap;
             }));
         }

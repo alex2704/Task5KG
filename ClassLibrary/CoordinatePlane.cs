@@ -105,8 +105,8 @@ namespace ClassLibrary
                 g.DrawString(s, myFont, Brushes.Black, II(0) + 5, JJ(i * h1) - 5);
             }
         }
-        PointF[] pointsMas = new PointF[500];
-        public void Draw(Graphics g, PictureBox pictureBox, int v, int x)
+        //PointF[] pointsMas = new PointF[500];
+        public void Draw(Graphics g, PictureBox pictureBox, int v, int k)
         {
             I2 = pictureBox.Width;
             J2 = pictureBox.Height;
@@ -118,8 +118,8 @@ namespace ClassLibrary
                 myFont = new Font("Arial", 7, FontStyle.Bold);
                 OX(II,JJ,g);
                 OY(II,JJ,g);
-                PointF[] points = new PointF[500];
-                for (int i = 0; i < 500; i++)
+                PointF[] points = new PointF[k];
+                for (int i = 0; i < k; i++)
                 {
                     points[i] = new PointF(II(i), JJ(FuncModel(v, i)));
                 }
@@ -128,7 +128,10 @@ namespace ClassLibrary
                 //PointF p3 = new PointF(II(10), JJ(5));
                 //PointF p4 = new PointF(II(20 + Step), JJ(20 + Step));
                 //PointF[] points = { p1, p2, p3, p4 };
-                g.DrawCurve(Pens.Black, points);
+                if (k > 1)
+                {
+                    g.DrawCurve(Pens.Black, points);
+                }
                 //if (Points.Count!=0)
                 //{
                 //    PointF[] mas = Points.ToArray();
