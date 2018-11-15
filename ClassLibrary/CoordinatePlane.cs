@@ -16,6 +16,8 @@ namespace ClassLibrary
         static int I1 = 0, J1 = 0, I2, J2;
         public double x1 = -0.1, y1 = -1, x2 = 3.1, y2 = 16;
         public delegate int IJ(double x);
+        public delegate double DrawFunc(double x);
+
 
         public Pen MyPen1;
         public Pen MyPen2;
@@ -65,19 +67,19 @@ namespace ClassLibrary
             if (dx >= 5) Result = 0;
             else
                 if (dx >= 0.5) Result = 1;
-                else
+            else
                     if (dx >= 0.05) Result = 2;
-                    else
+            else
                         if (dx >= 0.005) Result = 3;
-                        else
+            else
                             if (dx >= 0.0005) Result = 4;
-                                else Result = 5;
+            else Result = 5;
             return Result;
         }
         private void OX(IJ II, IJ JJ, Graphics g)
         {
             g.DrawLine(Pens.LightBlue, II(x1), JJ(0), II(x2), JJ(0));
-            double h1 = HH(x1,x2);
+            double h1 = HH(x1, x2);
             int k1 = (int)Math.Round(x1 / h1) - 1;
             int k2 = (int)Math.Round(x2 / h1);
             byte Digits = GetDigits(Math.Abs(x2 - x1));
@@ -105,8 +107,8 @@ namespace ClassLibrary
                 g.DrawString(s, myFont, Brushes.Black, II(0) + 5, JJ(i * h1) - 5);
             }
         }
-        //PointF[] pointsMas = new PointF[500];
-        public void Draw(Graphics g, PictureBox pictureBox, int v, int k)
+        PointF[] pointsMas = new PointF[500];
+        public void Draw(Graphics g, PictureBox pictureBox)
         {
             I2 = pictureBox.Width;
             J2 = pictureBox.Height;
@@ -116,22 +118,14 @@ namespace ClassLibrary
                 g.Clear(c1);
                 //Оси OX и OY
                 myFont = new Font("Arial", 7, FontStyle.Bold);
-                OX(II,JJ,g);
-                OY(II,JJ,g);
-                PointF[] points = new PointF[k];
-                for (int i = 0; i < k; i++)
-                {
-                    points[i] = new PointF(II(i), JJ(FuncModel(v, i)));
-                }
+                OX(II, JJ, g);
+                OY(II, JJ, g);
+
                 //PointF p1 = new PointF(II(0), JJ(0));
                 //PointF p2 = new PointF(II(5), JJ(10));
                 //PointF p3 = new PointF(II(10), JJ(5));
                 //PointF p4 = new PointF(II(20 + Step), JJ(20 + Step));
                 //PointF[] points = { p1, p2, p3, p4 };
-                if (k > 1)
-                {
-                    g.DrawCurve(Pens.Black, points);
-                }
                 //if (Points.Count!=0)
                 //{
                 //    PointF[] mas = Points.ToArray();
@@ -143,34 +137,22 @@ namespace ClassLibrary
             {
             }
         }
-        public double FuncModel(int v, double x)
+
+
+        public void DrawCurve(Graphics g, DrawFunc func, double x, double step = 0.1)
         {
-            switch (v)
+            List<PointF> points = new List<PointF>();
+            for (double i = -x; i < x; i += step)
             {
-                case 1:
-                    return Math.Pow(x,2);
-                case 2:
-                    return Math.Pow(x,3);
-                case 3:
-                    return Math.Pow(x,1/2);
-                default:
-                    return 0;
+                var res = func.Invoke(i);
+                if (!double.IsNaN(res) && !double.IsInfinity(res))
+                {
+                    points.Add(new PointF(II(i), JJ(res)));
+                }
             }
-        }
-        public void StartDrawModel(int v, double x)
-        {
-            PointF p1, p2 = new PointF();
-            double y = FuncModel(v, x);
-            p1 = new PointF(II(x),JJ(y));
-            p2 = new PointF(II(x + 100), JJ(FuncModel(v, x + 100)));
-            //Points.Add(p1);
-            //Points.Add(p2);
-        }
-        public void AddNewPoint(int v, double x)
-        {
-            //PointF numberPoint = new PointF(II(Points[Points.Count - 1].X + Step), JJ(FuncModel(v, Points[Points.Count - 1].X + Step)));
-            PointF numberPoint = new PointF(II(x + Step), JJ(FuncModel(v, x + Step)));
-            //Points.Add(numberPoint);
+
+            if (points.Count > 1)
+                g.DrawCurve(Pens.Black, points.ToArray());
         }
     }
 }

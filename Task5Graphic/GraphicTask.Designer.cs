@@ -217,6 +217,7 @@
             this.Func3.Tag = "3";
             this.Func3.Text = "x^(1/2)";
             this.Func3.UseVisualStyleBackColor = true;
+            this.Func3.CheckedChanged += new System.EventHandler(this.RadioGroupCheckChanged);
             // 
             // Func2
             // 
@@ -229,6 +230,7 @@
             this.Func2.Tag = "2";
             this.Func2.Text = "x^3";
             this.Func2.UseVisualStyleBackColor = true;
+            this.Func2.CheckedChanged += new System.EventHandler(this.RadioGroupCheckChanged);
             // 
             // Func1
             // 
@@ -241,6 +243,7 @@
             this.Func1.Tag = "1";
             this.Func1.Text = "x^2";
             this.Func1.UseVisualStyleBackColor = true;
+            this.Func1.CheckedChanged += new System.EventHandler(this.RadioGroupCheckChanged);
             // 
             // GraphicTask
             // 
