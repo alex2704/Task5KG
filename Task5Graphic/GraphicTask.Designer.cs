@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button9 = new System.Windows.Forms.Button();
+            this.Start_btn = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -38,14 +38,12 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.Func1 = new System.Windows.Forms.RadioButton();
-            this.Func2 = new System.Windows.Forms.RadioButton();
-            this.Func3 = new System.Windows.Forms.RadioButton();
-            this.Start_btn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Func3 = new System.Windows.Forms.RadioButton();
+            this.Func2 = new System.Windows.Forms.RadioButton();
+            this.Func1 = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.panel2.SuspendLayout();
@@ -81,6 +79,16 @@
             this.button9.Tag = "7";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // Start_btn
+            // 
+            this.Start_btn.Location = new System.Drawing.Point(5, 22);
+            this.Start_btn.Name = "Start_btn";
+            this.Start_btn.Size = new System.Drawing.Size(162, 71);
+            this.Start_btn.TabIndex = 21;
+            this.Start_btn.Text = "Start";
+            this.Start_btn.UseVisualStyleBackColor = true;
+            this.Start_btn.Click += new System.EventHandler(this.Start_btn_Click);
             // 
             // button8
             // 
@@ -166,10 +174,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // timer
-            // 
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
             // pictureBox
             // 
             this.pictureBox.Location = new System.Drawing.Point(-2, 0);
@@ -190,29 +194,17 @@
             this.panel2.Size = new System.Drawing.Size(265, 650);
             this.panel2.TabIndex = 3;
             // 
-            // Func1
+            // groupBox1
             // 
-            this.Func1.AutoSize = true;
-            this.Func1.Location = new System.Drawing.Point(12, 21);
-            this.Func1.Name = "Func1";
-            this.Func1.Size = new System.Drawing.Size(50, 21);
-            this.Func1.TabIndex = 0;
-            this.Func1.TabStop = true;
-            this.Func1.Tag = "1";
-            this.Func1.Text = "x^2";
-            this.Func1.UseVisualStyleBackColor = true;
-            // 
-            // Func2
-            // 
-            this.Func2.AutoSize = true;
-            this.Func2.Location = new System.Drawing.Point(12, 44);
-            this.Func2.Name = "Func2";
-            this.Func2.Size = new System.Drawing.Size(50, 21);
-            this.Func2.TabIndex = 1;
-            this.Func2.TabStop = true;
-            this.Func2.Tag = "2";
-            this.Func2.Text = "x^3";
-            this.Func2.UseVisualStyleBackColor = true;
+            this.groupBox1.Controls.Add(this.Func3);
+            this.groupBox1.Controls.Add(this.Func2);
+            this.groupBox1.Controls.Add(this.Func1);
+            this.groupBox1.Location = new System.Drawing.Point(14, 22);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 100);
+            this.groupBox1.TabIndex = 22;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
             // 
             // Func3
             // 
@@ -226,27 +218,29 @@
             this.Func3.Text = "x^(1/2)";
             this.Func3.UseVisualStyleBackColor = true;
             // 
-            // Start_btn
+            // Func2
             // 
-            this.Start_btn.Location = new System.Drawing.Point(5, 22);
-            this.Start_btn.Name = "Start_btn";
-            this.Start_btn.Size = new System.Drawing.Size(162, 71);
-            this.Start_btn.TabIndex = 21;
-            this.Start_btn.Text = "Start";
-            this.Start_btn.UseVisualStyleBackColor = true;
-            this.Start_btn.Click += new System.EventHandler(this.Start_btn_Click);
+            this.Func2.AutoSize = true;
+            this.Func2.Location = new System.Drawing.Point(12, 44);
+            this.Func2.Name = "Func2";
+            this.Func2.Size = new System.Drawing.Size(50, 21);
+            this.Func2.TabIndex = 1;
+            this.Func2.TabStop = true;
+            this.Func2.Tag = "2";
+            this.Func2.Text = "x^3";
+            this.Func2.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // Func1
             // 
-            this.groupBox1.Controls.Add(this.Func3);
-            this.groupBox1.Controls.Add(this.Func2);
-            this.groupBox1.Controls.Add(this.Func1);
-            this.groupBox1.Location = new System.Drawing.Point(14, 22);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 100);
-            this.groupBox1.TabIndex = 22;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.Func1.AutoSize = true;
+            this.Func1.Location = new System.Drawing.Point(12, 21);
+            this.Func1.Name = "Func1";
+            this.Func1.Size = new System.Drawing.Size(50, 21);
+            this.Func1.TabIndex = 0;
+            this.Func1.TabStop = true;
+            this.Func1.Tag = "1";
+            this.Func1.Text = "x^2";
+            this.Func1.UseVisualStyleBackColor = true;
             // 
             // GraphicTask
             // 
@@ -279,7 +273,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.RadioButton Func3;
